@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from ttmAPI.database.models import Base
+from models import Base
 
 #from sample_data.sampleDataSeeder import SampleDataSeeder  # Absolute path for import
 
@@ -33,6 +33,6 @@ if __name__ == "__main__":
     try:
         create_tables()
         #seed_data()
-        print("Tables created and sample data inserted successfully.")
+        print("Tables created")
     except Exception as e:
         print(f"An error occurred: {e}")

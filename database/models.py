@@ -8,9 +8,9 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
     user_id = Column(Integer, primary_key=True)
-    user_name = Column(String, nullable=False)
-    user_password = Column(String, nullable=False)
-    user_type = Column(String, nullable=False)
+    user_name = Column(String(50), nullable=False)
+    user_password = Column(String(25), nullable=False)
+    user_type = Column(String(15), nullable=False)
     
     # Relationships
     character_list = relationship('CharacterList', back_populates='user')
@@ -31,12 +31,12 @@ class CharacterList(Base):
 class Character(Base):
     __tablename__ = 'characters'
     char_id = Column(Integer, primary_key=True)
-    char_type = Column(String, nullable=False)
-    char_name = Column(String, nullable=False)
-    char_description = Column(String)
-    char_class = Column(String, nullable=False)
-    char_job = Column(String, nullable=False)
-    char_species = Column(String, nullable=False)
+    char_type = Column(String(15), nullable=False)
+    char_name = Column(String(150), nullable=False)
+    char_description = Column(String(500))
+    char_class = Column(String(25), nullable=False)
+    char_job = Column(String(25), nullable=False)
+    char_species = Column(String(25), nullable=False)
     char_level = Column(Integer, nullable=False)
     char_magic_point_value = Column(Integer, nullable=False)
     char_health_point_value = Column(Integer, nullable=False)
@@ -76,11 +76,11 @@ class Library(Base):
 class Ability(Base):
     __tablename__ = 'abilities'
     ability_id = Column(Integer, primary_key=True)
-    ability_cost = Column(String, nullable=False)
-    ability_requirements = Column(String, nullable=False)
-    ability_name = Column(String, nullable=False)
-    ability_description = Column(String, nullable=False)
-    ability_roll = Column(String, nullable=False)
+    ability_cost = Column(String(500), nullable=False)
+    ability_requirements = Column(String(500), nullable=False)
+    ability_name = Column(String(150), nullable=False)
+    ability_description = Column(String(500), nullable=False)
+    ability_roll = Column(String(500), nullable=False)
     
     # Relationships
     library = relationship('Library', back_populates='ability')
@@ -89,9 +89,9 @@ class Ability(Base):
 class Expertise(Base):
     __tablename__ = 'expertises'
     expertise_id = Column(Integer, primary_key=True)
-    expertise_name = Column(String, nullable=False)
-    expertise_description = Column(String, nullable=False)
-    expertise_roll = Column(String, nullable=False)
+    expertise_name = Column(String(150), nullable=False)
+    expertise_description = Column(String(500), nullable=False)
+    expertise_roll = Column(String(500), nullable=False)
     
     # Relationships
     library = relationship('Library', back_populates='expertise')
@@ -100,10 +100,10 @@ class Expertise(Base):
 class JobSkill(Base):
     __tablename__ = 'job_skills'
     job_skill_id = Column(Integer, primary_key=True)
-    job_skill_name = Column(String, nullable=False)
-    job_skill_requirements = Column(String, nullable=False)
-    job_skill_description = Column(String, nullable=False)
-    job_skill_roll = Column(String, nullable=False)
+    job_skill_name = Column(String(150), nullable=False)
+    job_skill_requirements = Column(String(500), nullable=False)
+    job_skill_description = Column(String(500), nullable=False)
+    job_skill_roll = Column(String(500), nullable=False)
     
     # Relationships
     library = relationship('Library', back_populates='job_skill')
@@ -112,10 +112,10 @@ class JobSkill(Base):
 class SpeciesPassive(Base):
     __tablename__ = 'species_passives'
     species_passive_id = Column(Integer, primary_key=True)
-    species_passive_species = Column(String, nullable=False)
-    species_passive_name = Column(String, nullable=False)
-    species_passive_description = Column(String, nullable=False)
-    species_passive_roll = Column(String)
+    species_passive_species = Column(String(25), nullable=False)
+    species_passive_name = Column(String(150), nullable=False)
+    species_passive_description = Column(String(500), nullable=False)
+    species_passive_roll = Column(String(500))
     
     # Relationships
     library = relationship('Library', back_populates='species_passive')
@@ -136,12 +136,12 @@ class Backpack(Base):
 class Weapon(Base):
     __tablename__ = 'weapons'
     weapon_id = Column(Integer, primary_key=True)
-    weapon_name = Column(String, nullable=False)
-    weapon_description = Column(String, nullable=False)
-    weapon_roll = Column(String, nullable=False)
-    weapon_ability_name = Column(String)
-    weapon_ability_description = Column(String)
-    weapon_ability_roll = Column(String)
+    weapon_name = Column(String(150), nullable=False)
+    weapon_description = Column(String(500), nullable=False)
+    weapon_roll = Column(String(500), nullable=False)
+    weapon_ability_name = Column(String(150))
+    weapon_ability_description = Column(String(150))
+    weapon_ability_roll = Column(String(500))
     
     # Relationships
     backpack = relationship('Backpack', back_populates='weapon')
@@ -150,9 +150,9 @@ class Weapon(Base):
 class Item(Base):
     __tablename__ = 'items'
     item_id = Column(Integer, primary_key=True)
-    item_name = Column(String, nullable=False)
-    item_description = Column(String, nullable=False)
-    item_roll = Column(String, nullable=False)
+    item_name = Column(String(150), nullable=False)
+    item_description = Column(String(500), nullable=False)
+    item_roll = Column(String(500), nullable=False)
     item_cost_rating = Column(Integer, nullable=False)
     
     # Relationships
