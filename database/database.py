@@ -27,7 +27,7 @@ def seed_data():
         seeder.seed()
         print("Sample data successfully inserted.")
 '''
-
+'''
 # Test connection and seed data
 if __name__ == "__main__":
     try:
@@ -36,3 +36,4 @@ if __name__ == "__main__":
         print("Tables created")
     except Exception as e:
         print(f"An error occurred: {e}")
+'''
