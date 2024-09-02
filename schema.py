@@ -93,7 +93,7 @@ class JobSkillSchema(BaseModel):
         orm_mode : True
 
 #Species Passive Schema
-class SpeciesPassive(BaseModel):
+class SpeciesPassiveSchema(BaseModel):
     species_passive_id = int
     species_passive_species = str
     species_passive_name = str
