@@ -270,11 +270,37 @@ public class ApiClient {
         return postResponse(endpoint, jsonInputString);
     }
 
-    public String adjustCharacterStats(Map<String, Object> statsData) throws Exception {
+    public String adjustCharacterStats(Map<String, Object> statsData, Map<String, Integer> diceRollResults) throws Exception {
         String endpoint = BASE_URL + "/player/adjust-stats/";
+        
+        // Define max limits for the stats
+        int maxStatLimit = 50;
+    
+        // Adjust stats based on provided dice roll results
+        for (String stat : statsData.keySet()) {
+            if (statsData.get(stat) instanceof Integer && diceRollResults.containsKey(stat)) {
+                int currentStat = (Integer) statsData.get(stat);
+                int rollValue = diceRollResults.get(stat);
+                int newStat = currentStat + rollValue;
+    
+                // Ensure the new stat doesn't exceed the max limit
+                if (newStat > maxStatLimit) {
+                    newStat = maxStatLimit;
+                }
+    
+                statsData.put(stat, newStat);
+            }
+        }
+    
+        // Convert the adjusted stats to JSON
         String jsonInputString = new JSONObject(statsData).toString();
+        
+        // Logging the adjusted stats
+        System.out.println("Adjusting stats with the following data: " + jsonInputString);
+    
         return postResponse(endpoint, jsonInputString);
     }
+    
 
     public String addItemToBackpack(int charId, int itemId) throws Exception {
         String endpoint = BASE_URL + "/player/add-item/";
