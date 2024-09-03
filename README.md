@@ -2,19 +2,23 @@
 
 ## Overview
 
-This repository contains the backend implementation of the `ttmAPI`, an Employee Checkout System developed for a homebrewed table top role playing game system. The API is designed to manage and track users (players), character lists, characters, abilitites, and items.
+This repository contains the backend implementation of the `ttmAPI`, an API designed to manage and track users (players), character lists, characters, abilities, items, and other related entities for a homebrewed tabletop role-playing game system. The API includes endpoints for both Game Masters (GM) and players, enabling robust character management, inventory control, and other game-related operations.
 
 ### Key Features
 
-- **Automatic Table and Data Management** The API will check if the necessary tables exist and create them. (This will eventually also include loading sample data for all tables.)
-    - If tables do not exist, they will be created.
-    - If tables exist - but are of a different structure, they will be modified.
-    - If tables exist, and match current structure, the API will provide a success indicator.
-
-- **More to Come**
+- **Automatic Table and Data Management:**
+   - The API automatically checks if the necessary tables exist upon startup.
+   - If tables do not exist, they will be created.
+   - If tables exist but are of a different structure, they will be modified to match the current schema.
+   - If tables exist and match the current structure, the API will provide a success indicator.
+- **Comprehensive Endpoints for GMs and Players:** 
+   - GMs can add characters, abilities, expertise, job skills, species passives, items, and weapons.
+   - Both GMs and players can manage character inventories, view and adjust character stats, and more.
+- **Extensible Design:**
+   - The API is designed with flexibility in mind, allowing for future expansions and enhancements.
 
 ### Note
-- **Development and Testing:** This API is designed to be cloned and ran locally. There is no live server set up.
+- **Development and Testing:** This API is designed to be cloned and run locally. There is no live server set up.
 
 ## Setup Instructions
 
@@ -53,3 +57,67 @@ Ensure you have the following installed:
       ```sql
       FLUSH PRIVILEGES;
       ```
+
+### Python Enviornment Setup
+
+   1. **Clone the Repository**
+      ```bash
+      git clone https://github.com/aj8971996/ttmAPI.git
+      cd ttmAPI
+      ```
+   2. **Create and Activate a Virtual Environment (Optional but recommended)**
+      ```bash
+      python3 -m venv env
+      source env/bin/activate  # On Windows use `env\Scripts\activate`
+      ```
+   3. **Install Dependencies**
+      ```bash
+      pip install -r requirements.txt
+      ```
+
+### Running the API
+
+   1. **Initialize the Database**
+   
+      Ensure the necessary tables are created or modified to match the current schema:
+
+      ```bash
+      python main.py
+      ```
+
+   2. **Start the FastAPI Server**
+      ```bash
+      uvicorn main:app --reload
+      ```
+
+   3. **Access the API**
+
+      Once the server is running, the API can be accessed at `http://localhost:8000`.
+
+### API Documentation
+
+FastAPI automatically generates interactive API documentation, which can be accessed at:
+
+   - Swagger UI: `http://localhost:8000/docs`
+   - ReDoc: `http://localhost:8000/redoc`
+
+### Available Endpoints
+
+The API provides a wide range of endpoints for both GMs and players. Here are some key endpoints:
+
+   - GM Endpoints
+      
+      - `POST /gm/add-character`: Add a new character.
+      - `POST /gm/add-ability`: Add a new ability.
+      - `GET /gm/view-characters`: View all characters.
+
+   - Player and GM Endpoints
+
+      - `POST /player/add-character`: Add a new player character.
+      - `GET /player/view-character`: View all characters for a player.
+      - `POST /player/level-up`: Level up a character.
+
+For a full list of endpoints and their descriptions, refer to the apiClient.java file.
+
+### Modifying the Database Schema
+If the database schema changes, the main.py script includes logic to automatically modify existing tables to align with the updated schema without losing data. This ensures that the API remains flexible and can adapt to future changes.
