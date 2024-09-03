@@ -270,18 +270,28 @@ public class ApiClient {
         return postResponse(endpoint, jsonInputString);
     }
 
-    public String adjustCharacterStats(Map<String, Object> statsData, Map<String, Integer> diceRollResults) throws Exception {
+    public String adjustCharacterStats(Map<String, Object> statsData, Map<String, Integer> statAllocation, int rolledValue) throws Exception {
         String endpoint = BASE_URL + "/player/adjust-stats/";
         
         // Define max limits for the stats
         int maxStatLimit = 50;
+        int totalAllocation = 0;
     
-        // Adjust stats based on provided dice roll results
-        for (String stat : statsData.keySet()) {
-            if (statsData.get(stat) instanceof Integer && diceRollResults.containsKey(stat)) {
+        // Validate the stat allocations
+        for (int allocation : statAllocation.values()) {
+            totalAllocation += allocation;
+        }
+    
+        if (totalAllocation > rolledValue) {
+            throw new Exception("Total allocation exceeds rolled value.");
+        }
+    
+        // Adjust stats based on the provided allocation
+        for (String stat : statAllocation.keySet()) {
+            if (statsData.get(stat) instanceof Integer) {
                 int currentStat = (Integer) statsData.get(stat);
-                int rollValue = diceRollResults.get(stat);
-                int newStat = currentStat + rollValue;
+                int allocation = statAllocation.get(stat);
+                int newStat = currentStat + allocation;
     
                 // Ensure the new stat doesn't exceed the max limit
                 if (newStat > maxStatLimit) {
@@ -295,12 +305,11 @@ public class ApiClient {
         // Convert the adjusted stats to JSON
         String jsonInputString = new JSONObject(statsData).toString();
         
-        // Logging the adjusted stats
+        // Logging the adjusted stats and allocation
         System.out.println("Adjusting stats with the following data: " + jsonInputString);
     
         return postResponse(endpoint, jsonInputString);
     }
-    
 
     public String addItemToBackpack(int charId, int itemId) throws Exception {
         String endpoint = BASE_URL + "/player/add-item/";
