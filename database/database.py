@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Base
+from database.models import Base
 
 #from sample_data.sampleDataSeeder import SampleDataSeeder  # Absolute path for import
 
