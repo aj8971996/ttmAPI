@@ -136,10 +136,11 @@ class ItemSchema(BaseModel):
 
 from pydantic import BaseModel
 
-# User Registration Schema
-class UserRegisterSchema(BaseModel):
+class UserSchema(BaseModel):
+    user_id: int
     user_name: str
     user_type: str
+    hashed_password: str
 
     class Config:
         from_attributes = True

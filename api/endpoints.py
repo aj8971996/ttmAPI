@@ -1,10 +1,11 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database.database import get_db
+from database.models import User
 from schema import (
     CharacterSchema, AbilitySchema, ExpertiseSchema, JobSkillSchema, 
     SpeciesPassiveSchema, ItemSchema, WeaponSchema, CharacterListSchema, 
-    LibrarySchema, BackpackSchema
+    LibrarySchema, BackpackSchema, UserSchema
 )
 from typing import List
 from api.reports import (
@@ -17,6 +18,8 @@ from api.reports import (
     level_up_character, adjust_character_stats, add_item_to_backpack, 
     remove_item_from_backpack, add_weapon_to_backpack, remove_weapon_from_backpack
 )
+from fastapi.security import OAuth2PasswordRequestForm
+from api.auth import *
 
 """
 Table of Contents:
@@ -322,6 +325,20 @@ async def register_user(user_name: str, user_type: str, db: Session = Depends(ge
         user_name=user_name,
         user_type=user_type
     )
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return {"message": "User registered successfully", "user_id": new_user.user_id}
+
+@app.post("/register/")
+def register_user(user_data: UserSchema, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter(User.user_name == user_data.user_name).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Username already exists")
+
+    hashed_password = get_password_hash(user_data.password)
+    new_user = User(user_name=user_data.user_name, user_type=user_data.user_type, hashed_password=hashed_password)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

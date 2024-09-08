@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database.database import get_db
 from database.models import User, Character, CharacterList, Library, Ability, Expertise, JobSkill, SpeciesPassive, Backpack, Item, Weapon
 from schema import UserRegisterSchema
+from api import auth
 
 router = APIRouter()
 
@@ -461,14 +462,16 @@ def remove_weapon_from_backpack(char_id: int, weapon_id: int, db: Session = Depe
     return {"message": "Weapon removed from backpack successfully"}
 
 
-# User Registration Endpoint
-@router.post("/register")
+from auth import get_password_hash, create_access_token
+
+@router.post("/register/")
 def register_user(user_data: UserRegisterSchema, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.user_name == user_data.user_name).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Username already exists")
 
-    new_user = User(user_name=user_data.user_name, user_type=user_data.user_type)
+    hashed_password = get_password_hash(user_data.password)
+    new_user = User(user_name=user_data.user_name, user_type=user_data.user_type, hashed_password=hashed_password)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
