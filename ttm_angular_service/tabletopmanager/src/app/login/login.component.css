@@ -27,11 +27,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto; /* Add auto margin */
-  position: absolute; /* Ensures it sticks to the center */
-  top: 50%; /* Adjust to center vertically */
-  left: 50%; /* Adjust to center horizontally */
-  transform: translate(-50%, -50%); /* Move it back to true center */
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 h2 {
@@ -51,15 +51,21 @@ input {
   box-sizing: border-box;
 }
 
+form {
+  width: 100%;  /* Ensures the form takes the full width of the container */
+}
+
 button {
-  width: 100%;
+  display: block;
+  width: 100%;  /* Ensure both buttons are full-width and equal */
   padding: 10px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px; /* Adds space between the buttons */
+  margin-top: 10px;  /* Adds uniform space between buttons */
+  box-sizing: border-box;  /* Ensures the padding is included in width */
 }
 
 button:hover {
@@ -68,9 +74,9 @@ button:hover {
 
 /* Specific styling for the Register button */
 button.register-button {
-  background-color: #28a745; /* Different color for register */
+  background-color: #28a745;
 }
 
 button.register-button:hover {
-  background-color: #218838; /* Darker shade on hover */
+  background-color: #218838;
 }
