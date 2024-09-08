@@ -6,21 +6,18 @@ This repository contains the backend implementation of the `ttmAPI`, an API desi
 
 ### Key Features
 
-- **Automatic Table and Data Management:**
-   - The API automatically checks if the necessary tables exist upon startup.
-   - If tables do not exist, they will be created.
-   - If tables exist but are of a different structure, they will be modified to match the current schema.
-   - If tables exist and match the current structure, the API will provide a success indicator.
+- **User Registration with Password Hashing:**
+   - User registration now requires a password and password confirmation.
+   - Passwords are hashed securely using industry-standard practices, ensuring that they are not stored in plaintext.
+
+- **JWT Authentication:**
+   - Login functionality includes the creation of JWT tokens, ensuring secure authentication for users.
+
 - **Comprehensive Endpoints for GMs and Players:** 
    - GMs can add characters, abilities, expertise, job skills, species passives, items, and weapons.
    - Both GMs and players can manage character inventories, view and adjust character stats, and more.
-- **Extensible Design:**
-   - The API is designed with flexibility in mind, allowing for future expansions and enhancements.
 
-### Note
-- **Development and Testing:** This API is designed to be cloned and run locally. There is no live server set up.
-
-## Setup Instructions
+### Setup Instructions
 
 ### Prerequisites
 
@@ -58,7 +55,7 @@ Ensure you have the following installed:
       FLUSH PRIVILEGES;
       ```
 
-### Python Enviornment Setup
+### Python Environment Setup
 
    1. **Clone the Repository**
       ```bash
@@ -117,7 +114,15 @@ The API provides a wide range of endpoints for both GMs and players. Here are so
       - `GET /player/view-character`: View all characters for a player.
       - `POST /player/level-up`: Level up a character.
 
-For a full list of endpoints and their descriptions, refer to the apiClient.java file.
+### User Registration and Authentication
+
+- **User Registration**:
+   - Users can register as either a GM or a Player.
+   - Registration requires a username and password. The password is hashed before being stored in the database.
+   
+- **Login and JWT Authentication**:
+   - Users can log in with their username and password.
+   - Upon successful login, a JWT token is issued, which is used for authentication in subsequent API requests.
 
 ### Modifying the Database Schema
 If the database schema changes, the main.py script includes logic to automatically modify existing tables to align with the updated schema without losing data. This ensures that the API remains flexible and can adapt to future changes.
