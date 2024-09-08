@@ -1,0 +1,31 @@
+.side-menu {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hidden by default */
+    height: 100%;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .side-menu button {
+    padding: 10px 15px;
+    text-align: left;
+    color: white;
+    background-color: #333;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+  }
+  
+  .side-menu button:hover {
+    background-color: #575757;
+  }
+  
+  /* Open the side menu */
+  .side-menu.open {
+    left: 0;
+  }  

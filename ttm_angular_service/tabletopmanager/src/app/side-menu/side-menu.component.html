@@ -1,0 +1,38 @@
+<div class="side-menu">
+    <!-- GM Menu Items (visible only to GM) -->
+    <ng-container *ngIf="isGM">
+      <button (click)="addCharacter()">Add Character</button>
+      <button (click)="addAbility()">Add Ability</button>
+      <button (click)="addExpertise()">Add Expertise</button>
+      <button (click)="addJobSkill()">Add Job Skill</button>
+      <button (click)="addSpeciesPassive()">Add Species Passive</button>
+      <button (click)="addItem()">Add Item</button>
+      <button (click)="addWeapon()">Add Weapon</button>
+      <button (click)="viewCharacters()">View All Characters</button>
+      <button (click)="viewLibraries()">View All Libraries</button>
+      <button (click)="viewBackpacks()">View All Backpacks</button>
+      <button (click)="viewItems()">View Item Inventory</button>
+      <button (click)="viewAbilities()">View All Abilities</button>
+      <button (click)="bulkRemoveItems()">Bulk Remove Items</button>
+    </ng-container>
+  
+    <!-- Player Menu Items (visible to both GM and Player) -->
+    <ng-container *ngIf="isPlayer">
+      <button (click)="addPlayerCharacter()">Add Character</button>
+      <button (click)="viewPlayerCharacter()">View Character</button>
+      <button (click)="viewPlayerBackpack()">View Backpack</button>
+      <button (click)="viewPlayerLibrary()">View Library</button>
+      <button (click)="getAbilityDetails()">Get Ability Details</button>
+      <button (click)="getJobSkillDetails()">Get Job Skill Details</button>
+      <button (click)="getSpeciesPassiveDetails()">Get Species Passive Details</button>
+      <button (click)="getExpertiseDetails()">Get Expertise Details</button>
+      <button (click)="getItemDetails()">Get Item Details</button>
+      <button (click)="getWeaponDetails()">Get Weapon Details</button>
+      <button (click)="levelUpCharacter()">Level Up Character</button>
+      <button (click)="adjustCharacterStats()">Adjust Stats</button>
+      <button (click)="addItemToBackpack()">Add Item to Backpack</button>
+      <button (click)="removeItemFromBackpack()">Remove Item from Backpack</button>
+      <button (click)="addWeaponToBackpack()">Add Weapon to Backpack</button>
+      <button (click)="removeWeaponFromBackpack()">Remove Weapon from Backpack</button>
+    </ng-container>
+  </div>  

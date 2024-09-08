@@ -1,11 +1,15 @@
 <div class="gm-view">
-  <h1>Welcome, Game Master (GM)</h1>
+  <h1>Welcome, GM!</h1>
   
-  <!-- Buttons for managing characters and abilities -->
-  <div class="button-container">
-    <button (click)="manageCharacters()">Manage Characters</button>
-    <button (click)="manageAbilities()">Manage Abilities</button>
+  <!-- Hamburger menu button -->
+  <div class="hamburger-menu" (click)="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
   </div>
+
+  <!-- Include the side menu -->
+  <app-side-menu></app-side-menu>
 
   <!-- Logout button -->
   <div class="logout-container">
