@@ -1,10 +1,74 @@
 <div class="player-view">
-  <h1>Welcome, Player</h1>
-  
-  <!-- Buttons for viewing characters and inventory -->
-  <div class="button-container">
-    <button (click)="viewCharacter()">View Characters</button>
-    <button (click)="viewInventory()">View Inventory</button>
+  <h1>Welcome, Player!</h1>
+
+  <!-- Hamburger menu button -->
+  <div class="hamburger-menu" (click)="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <!-- Include the side menu -->
+  <app-side-menu></app-side-menu>
+
+  <!-- Action Cards Section -->
+  <div class="action-cards-container">
+    <div class="card" (click)="viewCharacter()">
+      <h3>View Character</h3>
+      <p>View and manage your character using GET /player/view-character/.</p>
+    </div>
+    <div class="card" (click)="viewBackpack()">
+      <h3>View Backpack</h3>
+      <p>Check the items in your backpack with GET /player/view-backpack/.</p>
+    </div>
+    <div class="card" (click)="viewLibrary()">
+      <h3>View Library</h3>
+      <p>Access your personal library using GET /player/view-library/.</p>
+    </div>
+    <div class="card" (click)="getAbilityDetails()">
+      <h3>Get Ability Details</h3>
+      <p>See details of your abilities with GET /player/get-ability/.</p>
+    </div>
+    <div class="card" (click)="getJobSkillDetails()">
+      <h3>Get Job Skill Details</h3>
+      <p>View job skill details using GET /player/get-job-skill/.</p>
+    </div>
+    <div class="card" (click)="getSpeciesPassiveDetails()">
+      <h3>Get Species Passive Details</h3>
+      <p>See species passives using GET /player/get-species-passive/.</p>
+    </div>
+    <div class="card" (click)="getItemDetails()">
+      <h3>Get Item Details</h3>
+      <p>Explore item details with GET /player/get-item/.</p>
+    </div>
+    <div class="card" (click)="getWeaponDetails()">
+      <h3>Get Weapon Details</h3>
+      <p>View weapon information using GET /player/get-weapon/.</p>
+    </div>
+    <div class="card" (click)="levelUpCharacter()">
+      <h3>Level Up Character</h3>
+      <p>Level up your character with POST /player/level-up/.</p>
+    </div>
+    <div class="card" (click)="adjustCharacterStats()">
+      <h3>Adjust Stats</h3>
+      <p>Modify character stats using POST /player/adjust-stats/.</p>
+    </div>
+    <div class="card" (click)="addItemToBackpack()">
+      <h3>Add Item to Backpack</h3>
+      <p>Add items to your backpack using POST /player/add-item/.</p>
+    </div>
+    <div class="card" (click)="removeItemFromBackpack()">
+      <h3>Remove Item from Backpack</h3>
+      <p>Remove items from your backpack with DELETE /player/remove-item/.</p>
+    </div>
+    <div class="card" (click)="addWeaponToBackpack()">
+      <h3>Add Weapon to Backpack</h3>
+      <p>Add weapons to your backpack with POST /player/add-weapon/.</p>
+    </div>
+    <div class="card" (click)="removeWeaponFromBackpack()">
+      <h3>Remove Weapon from Backpack</h3>
+      <p>Remove weapons from your backpack with DELETE /player/remove-weapon/.</p>
+    </div>
   </div>
 
   <!-- Logout button -->
