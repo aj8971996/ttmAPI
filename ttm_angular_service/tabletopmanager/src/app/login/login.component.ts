@@ -23,21 +23,23 @@ export class LoginComponent {
       this.errorMessage = 'Username and password are required';
       return;
     }
-
+  
     this.authService.login(this.username, this.password).subscribe(
       (response) => {
         // Handle the login response
         const userType = response.user_type; // Assuming response contains user_type
         const token = response.access_token; // Assuming response contains access_token
-
+  
         if (token) {
           // Store the token for authentication persistence
           localStorage.setItem('token', token);
           
-          // Navigate based on user type
+          // Set the userRole in localStorage based on the userType
           if (userType === 'GM') {
+            localStorage.setItem('userRole', 'GM'); // Set GM role
             this.router.navigate(['/view-gm']);
           } else if (userType === 'Player') {
+            localStorage.setItem('userRole', 'Player'); // Set Player role
             this.router.navigate(['/view-player']);
           }
         }
@@ -47,7 +49,7 @@ export class LoginComponent {
         this.errorMessage = 'Login failed. Please check your credentials.';
       }
     );
-  }
+  }  
 
   goToRegister() {
     this.router.navigate(['/register']); // Navigate to the registration page
