@@ -21,6 +21,7 @@ body {
   border-radius: 5px;
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
   background-color: white;
+
   /* Centering the container */
   display: flex;
   flex-direction: column;
@@ -58,8 +59,18 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px; /* Adds space between the buttons */
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Specific styling for the Register button */
+button.register-button {
+  background-color: #28a745; /* Different color for register */
+}
+
+button.register-button:hover {
+  background-color: #218838; /* Darker shade on hover */
 }
