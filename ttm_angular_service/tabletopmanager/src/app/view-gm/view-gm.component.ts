@@ -91,11 +91,16 @@ export class ViewGmComponent {
     } else {
       console.error("Menu or hamburger button element not found.");
     }
-  }  
+  } 
+
+  addToInventory() {
+    this.router.navigate(['/add-to-inventory']); //Redirect to the Add to Inventory Form
+  }
 
   // Logout and navigate back to login page
   logout() {
     this.authService.logout(); // Clear authentication
     this.router.navigate(['/login']); // Redirect to login page
   }
+
 }

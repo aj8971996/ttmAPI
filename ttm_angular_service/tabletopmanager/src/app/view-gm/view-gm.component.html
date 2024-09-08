@@ -29,17 +29,13 @@
       <h3>Add Job Skill</h3>
       <p>Enhance characters with job skills using POST /gm/add-job-skill/.</p>
     </div>
+    <div class="card" (click)="addToInventory()">
+      <h3>Add To Inventory</h3>
+      <p>This leads to a form where you can create both Items and Weapons to be added to their resective database. The form will adjust based on the inventory value being added.</p>
+    </div>
     <div class="card" (click)="addSpeciesPassive()">
       <h3>Add Species Passive</h3>
       <p>Assign species passives via the POST /gm/add-species-passive/ endpoint.</p>
-    </div>
-    <div class="card" (click)="addItem()">
-      <h3>Add Item</h3>
-      <p>Add new items using the POST /gm/add-item/ endpoint.</p>
-    </div>
-    <div class="card" (click)="addWeapon()">
-      <h3>Add Weapon</h3>
-      <p>Add weapons for characters using POST /gm/add-weapon/.</p>
     </div>
     <div class="card" (click)="viewCharacters()">
       <h3>View Characters</h3>
