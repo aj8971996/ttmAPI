@@ -304,3 +304,26 @@ async def remove_weapon_from_backpack_endpoint(char_id: int, weapon_id: int, db:
         raise e
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+# Register User
+@app.post("/register/")
+async def register_user(user_name: str, user_type: str, db: Session = Depends(get_db)):
+    # Ensure user_type is either "GM" or "Player"
+    if user_type not in ["GM", "Player"]:
+        raise HTTPException(status_code=400, detail="Invalid user_type. Must be 'GM' or 'Player'.")
+
+    # Check if username already exists
+    existing_user = db.query(User).filter(User.user_name == user_name).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Username already exists.")
+
+    # Create a new user
+    new_user = User(
+        user_name=user_name,
+        user_type=user_type
+    )
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return {"message": "User registered successfully", "user_id": new_user.user_id}
