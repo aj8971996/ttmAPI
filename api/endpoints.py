@@ -19,7 +19,8 @@ from api.reports import (
     remove_item_from_backpack, add_weapon_to_backpack, remove_weapon_from_backpack
 )
 from fastapi.security import OAuth2PasswordRequestForm
-from api.auth import *
+from auth import *
+from api.reports import router as reports_router
 
 """
 Table of Contents:
@@ -58,6 +59,8 @@ Table of Contents:
 """
 
 app = FastAPI()
+
+app.include_router(reports_router)
 
 # GM Endpoints
 
@@ -344,3 +347,19 @@ def register_user(user_data: UserSchema, db: Session = Depends(get_db)):
     db.refresh(new_user)
 
     return {"message": "User registered successfully", "user_id": new_user.user_id}
+
+from fastapi.security import OAuth2PasswordRequestForm
+from auth import verify_password, create_access_token
+
+# Login route for user authentication
+@app.post("/login/")
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.user_name == form_data.username).first()
+
+    # Check if the user exists and the password is correct
+    if not user or not verify_password(form_data.password, user.hashed_password):
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    # Generate JWT access token
+    access_token = create_access_token(data={"sub": user.user_name})
+    return {"access_token": access_token, "token_type": "bearer"}

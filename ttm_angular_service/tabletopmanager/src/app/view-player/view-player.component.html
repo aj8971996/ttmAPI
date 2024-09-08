@@ -1,4 +1,14 @@
 <div class="player-view">
-    <h1>Welcome, Player</h1>
-    <button (click)="logout()">Logout</button>
-  </div>  
+  <h1>Welcome, Player</h1>
+  
+  <!-- Buttons for viewing characters and inventory -->
+  <div class="button-container">
+    <button (click)="viewCharacter()">View Characters</button>
+    <button (click)="viewInventory()">View Inventory</button>
+  </div>
+
+  <!-- Logout button -->
+  <div class="logout-container">
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
+</div>

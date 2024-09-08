@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router'; // Import Router for navigation
+import { CommonModule } from '@angular/common'; // Import CommonModule for *ngIf
 
 @Component({
   selector: 'app-view-gm',
+  standalone: true,
   templateUrl: './view-gm.component.html',
-  styleUrls: ['./view-gm.component.css']
+  styleUrls: ['./view-gm.component.css'],
+  imports: [FormsModule, CommonModule], // Ensure CommonModule is included for *ngIf
 })
 export class ViewGmComponent {
 

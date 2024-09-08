@@ -1,5 +1,11 @@
 <div class="login-container">
   <h2>Table Top Manager</h2>
+
+  <!-- Display error message if login fails -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
   <form (ngSubmit)="login()">
     <div>
       <label for="username">Username:</label>

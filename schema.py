@@ -1,15 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
 
-# User Schema
-class UserSchema(BaseModel):
-    user_id: int
-    user_name: str
-    user_type: str
-
-    class Config:
-        from_attributes = True
-
 # Character List Schema
 class CharacterListSchema(BaseModel):
     list_id: int
@@ -141,6 +132,14 @@ class UserSchema(BaseModel):
     user_name: str
     user_type: str
     hashed_password: str
+
+    class Config:
+        from_attributes = True
+
+class UserRegisterSchema(BaseModel):
+    user_name: str
+    password: str
+    user_type: str
 
     class Config:
         from_attributes = True

@@ -9,6 +9,7 @@ export const routes: Route[] = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'view-gm', component: ViewGmComponent, canActivate: [AuthGuard] }, // Route for GM view with guard
-  { path: 'view-player', component: ViewPlayerComponent, canActivate: [AuthGuard] }, // Route for Player view with guard
+  { path: 'view-gm', component: ViewGmComponent, canActivate: [AuthGuard] }, // GM View
+  { path: 'view-player', component: ViewPlayerComponent, canActivate: [AuthGuard] }, // Player View
+  { path: '**', redirectTo: '/login' }, // Catch-all route to redirect to login
 ];

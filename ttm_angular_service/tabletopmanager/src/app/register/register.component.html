@@ -1,26 +1,68 @@
 <div class="register-container">
   <h2>Table Top Manager</h2>
   <form (ngSubmit)="register()">
+    <!-- Username Field -->
     <div>
       <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="user_name" name="username" required />
+      <input 
+        type="text" 
+        id="username" 
+        [(ngModel)]="user_name" 
+        name="username" 
+        required 
+        (input)="checkPasswordsMatch()" 
+      />
     </div>
+
+    <!-- Password Field -->
     <div>
       <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required />
+      <input 
+        type="password" 
+        id="password" 
+        [(ngModel)]="password" 
+        name="password" 
+        required 
+        (input)="checkPasswordsMatch()" 
+      />
     </div>
+
+    <!-- Confirm Password Field -->
     <div>
       <label for="confirm_password">Confirm Password:</label>
-      <input type="password" id="confirm_password" [(ngModel)]="confirm_password" name="confirm_password" required />
+      <input 
+        type="password" 
+        id="confirm_password" 
+        [(ngModel)]="confirm_password" 
+        name="confirm_password" 
+        required 
+        (input)="checkPasswordsMatch()" 
+      />
+      <!-- Real-time password match feedback -->
+      <p *ngIf="!passwordsMatch && confirm_password.length > 0" style="color:red;">
+        Passwords do not match
+      </p>
     </div>
+
+    <!-- User Type Dropdown -->
     <div>
       <label for="user_type">Register as:</label>
       <select id="user_type" [(ngModel)]="user_type" name="user_type" required>
-        <option value="" disabled selected>Select type</option>
+        <option value="" disabled>Select type</option>
         <option value="GM">Game Master (GM)</option>
         <option value="Player">Player</option>
       </select>
     </div>
-    <button type="submit">Register</button>
+
+    <!-- Error message -->
+    <p *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</p>
+
+    <!-- Register Button -->
+    <button 
+      type="submit" 
+      [disabled]="!user_name || !password || !confirm_password || !passwordsMatch || !user_type"
+    >
+      Register
+    </button>
   </form>
 </div>

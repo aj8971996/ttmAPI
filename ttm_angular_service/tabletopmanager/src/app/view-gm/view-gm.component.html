@@ -1,4 +1,14 @@
 <div class="gm-view">
-    <h1>Welcome, Game Master</h1>
-    <button (click)="logout()">Logout</button>
+  <h1>Welcome, Game Master (GM)</h1>
+  
+  <!-- Buttons for managing characters and abilities -->
+  <div class="button-container">
+    <button (click)="manageCharacters()">Manage Characters</button>
+    <button (click)="manageAbilities()">Manage Abilities</button>
   </div>
+
+  <!-- Logout button -->
+  <div class="logout-container">
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
+</div>

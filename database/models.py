@@ -10,7 +10,7 @@ class User(Base):
     user_id = Column(Integer, primary_key=True)
     user_name = Column(String(50), nullable=False)
     user_type = Column(String(15), nullable=False)
-    hashed_password = Column(String, nullable=False)
+    hashed_password = Column(String(60), nullable=False)
 
     __table_args__ = (
         CheckConstraint("user_type IN ('GM', 'Player')", name='user_type_check'),

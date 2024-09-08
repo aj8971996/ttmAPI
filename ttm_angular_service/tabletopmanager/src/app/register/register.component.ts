@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router'; // Import Router for navigation
+import { CommonModule } from '@angular/common'; // Import CommonModule for *ngIf
 
 @Component({
   selector: 'app-register',
   standalone: true,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule], // Ensure CommonModule is included for *ngIf
 })
 export class RegisterComponent {
   user_name: string = '';
@@ -16,6 +17,7 @@ export class RegisterComponent {
   password: string = '';
   confirm_password: string = ''; // Add confirm password field
   passwordsMatch: boolean = true; // A flag to track if passwords match
+  errorMessage: string = ''; // Error message
 
   constructor(private authService: AuthService, private router: Router) {} // Inject Router
 
@@ -27,13 +29,19 @@ export class RegisterComponent {
   register() {
     if (this.passwordsMatch) {
       // Call the registration service only if passwords match
-      this.authService.register(this.user_name, this.password, this.user_type).subscribe((response) => {
-        console.log('Registered:', response);
-        // Handle the response, e.g., navigate back to login
-        this.router.navigate(['/login']); // Redirect to login
-      });
+      this.authService.register(this.user_name, this.password, this.user_type).subscribe(
+        (response) => {
+          console.log('Registered:', response);
+          // Handle the response, e.g., navigate back to login
+          this.router.navigate(['/login']); // Redirect to login
+        },
+        (error) => {
+          console.error('Registration failed:', error);
+          this.errorMessage = 'Registration failed. Please try again.';
+        }
+      );
     } else {
-      alert('Passwords do not match!'); // Display alert if passwords don't match
+      this.errorMessage = 'Passwords do not match!';
     }
   }
 }

@@ -1,5 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
@@ -8,8 +8,8 @@ import { AppComponent } from './app/app.component'; // Assuming AppComponent is 
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),  // This will handle the routing between login, register, etc.
-    provideHttpClient(withFetch()),  // Ensure HttpClient is provided
-    importProvidersFrom(FormsModule) // Ensure FormsModule is included for forms
+    provideRouter(routes),  // Ensure routing is properly provided
+    provideHttpClient(),    // Ensure HttpClient is provided for the app
+    importProvidersFrom(FormsModule), // Ensure FormsModule is included for form handling
   ],
 }).catch((err) => console.error(err));

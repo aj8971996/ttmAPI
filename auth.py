@@ -1,12 +1,16 @@
 import os
+from dotenv import load_dotenv
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
+# Load environment variables from ttm.env located on the desktop
+load_dotenv(os.path.expanduser("~/Desktop/ttm.env"))
+
 # JWT configuration
-SECRET_KEY = os.getenv("SECRET_KEY")  # Make sure this is set in environment variables
+SECRET_KEY = os.getenv("SECRET_KEY")  # This should now be read from the .env file
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -46,3 +50,8 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
     except JWTError:
         raise credentials_exception
     return user_name
+
+'''
+if __name__ == "__main__":
+    print(SECRET_KEY)
+'''

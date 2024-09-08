@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from database.database import get_db
 from database.models import User, Character, CharacterList, Library, Ability, Expertise, JobSkill, SpeciesPassive, Backpack, Item, Weapon
 from schema import UserRegisterSchema
-from api import auth
+from auth import get_password_hash, create_access_token
 
 router = APIRouter()
 
@@ -466,14 +466,38 @@ from auth import get_password_hash, create_access_token
 
 @router.post("/register/")
 def register_user(user_data: UserRegisterSchema, db: Session = Depends(get_db)):
+    # Check if username already exists
     existing_user = db.query(User).filter(User.user_name == user_data.user_name).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Username already exists")
 
+    # Hash the password before storing it
     hashed_password = get_password_hash(user_data.password)
-    new_user = User(user_name=user_data.user_name, user_type=user_data.user_type, hashed_password=hashed_password)
+
+    # Create a new user with the hashed password
+    new_user = User(
+        user_name=user_data.user_name,
+        user_type=user_data.user_type,
+        hashed_password=hashed_password
+    )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
 
     return {"message": "User registered successfully", "user_id": new_user.user_id}
+
+from fastapi.security import OAuth2PasswordRequestForm
+from auth import verify_password, create_access_token
+
+@router.post("/login/")
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    # Fetch the user based on the provided username
+    user = db.query(User).filter(User.user_name == form_data.username).first()
+
+    # Validate the user and password
+    if not user or not verify_password(form_data.password, user.hashed_password):
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+
+    # Create an access token
+    access_token = create_access_token(data={"sub": user.user_name})
+    return {"access_token": access_token, "token_type": "bearer", "user_type": user.user_type}

@@ -1,27 +1,33 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router'; // Import Router for navigation
+import { CommonModule } from '@angular/common'; // Import CommonModule for *ngIf
 
 @Component({
   selector: 'app-view-player',
+  standalone: true,
   templateUrl: './view-player.component.html',
-  styleUrls: ['./view-player.component.css']
+  styleUrls: ['./view-player.component.css'],
+  imports: [FormsModule, CommonModule], // Ensure CommonModule is included for *ngIf
 })
 export class ViewPlayerComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // Navigate to view characters (placeholder for actual functionality)
+  // Placeholder for navigating to view characters
   viewCharacter() {
-    // Navigate to character viewing page or feature
+    console.log('Navigating to view character');
+    // Implement functionality to navigate or display character-related features
   }
 
-  // Navigate to view inventory (placeholder for actual functionality)
+  // Placeholder for navigating to view inventory
   viewInventory() {
-    // Navigate to inventory viewing page or feature
+    console.log('Navigating to view inventory');
+    // Implement functionality to navigate or display inventory-related features
   }
 
-  // Logout and navigate back to login page
+  // Logout functionality
   logout() {
     this.authService.logout(); // Clear authentication
     this.router.navigate(['/login']); // Redirect to login page
