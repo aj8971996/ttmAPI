@@ -1,29 +1,20 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../api.service';  // Ensure the correct service is imported
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule],
+  standalone: true, // This allows the component to work without a module
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  imports: [FormsModule], // Ensure FormsModule is imported here
 })
 export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private apiService: ApiService) {}  // Ensure ApiService is injected
-
   login() {
-    this.apiService.addPlayerCharacter({ username: this.username, password: this.password })
-      .subscribe({
-        next: (response) => {
-          console.log('Login successful', response);
-        },
-        error: (error) => {
-          console.error('Login failed', error);
-        },
-      });
+    console.log('Username:', this.username);
+    console.log('Password:', this.password);
+    // Add login logic here (e.g., API call to authenticate)
   }
 }
