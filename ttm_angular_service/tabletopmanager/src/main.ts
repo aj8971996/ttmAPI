@@ -10,6 +10,6 @@ bootstrapApplication(LoginComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(withFetch()),
-    importProvidersFrom(FormsModule), // Make sure FormsModule is imported here
+    importProvidersFrom(FormsModule), // Ensure FormsModule is included here
   ],
 }).catch((err) => console.error(err));

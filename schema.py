@@ -5,7 +5,6 @@ from typing import Optional
 class UserSchema(BaseModel):
     user_id: int
     user_name: str
-    user_password: str
     user_type: str
 
     class Config:

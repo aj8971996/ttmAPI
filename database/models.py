@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, CheckConstraint
 from sqlalchemy.orm import declarative_base, relationship
 from datetime import datetime
 
@@ -9,9 +9,13 @@ class User(Base):
     __tablename__ = 'users'
     user_id = Column(Integer, primary_key=True)
     user_name = Column(String(50), nullable=False)
-    user_password = Column(String(25), nullable=False)
     user_type = Column(String(15), nullable=False)
-    
+
+    # Ensure user_type is either 'GM' or 'Player'
+    __table_args__ = (
+        CheckConstraint("user_type IN ('GM', 'Player')", name='user_type_check'),
+    )
+
     # Relationships
     character_list = relationship('CharacterList', back_populates='user')
 

@@ -1,1 +1,18 @@
-<p>register works!</p>
+<div class="register-container">
+    <h2>Register</h2>
+    <form (ngSubmit)="register()">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" [(ngModel)]="user_name" name="username" required />
+      </div>
+      <div>
+        <label for="user_type">Register as:</label>
+        <select id="user_type" [(ngModel)]="user_type" name="user_type" required>
+          <option value="" disabled selected>Select type</option>
+          <option value="GM">Game Master (GM)</option>
+          <option value="Player">Player</option>
+        </select>
+      </div>
+      <button type="submit">Register</button>
+    </form>
+  </div>  
