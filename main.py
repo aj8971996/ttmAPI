@@ -1,8 +1,24 @@
 import uvicorn
-from api.endpoints import app
+from fastapi import FastAPI
+from api.reports import router as reports_router  # Import the router from reports.py
 from sqlalchemy import inspect, MetaData, Table
 from database.database import create_tables, engine
 from sqlalchemy.exc import OperationalError
+from fastapi.middleware.cors import CORSMiddleware  # Import CORS middleware
+
+app = FastAPI()
+
+# Add CORS middleware to allow Angular frontend to make requests to this API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],  # Angular dev server URL, adjust as needed
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods like GET, POST, etc.
+    allow_headers=["*"],  # Allow all headers
+)
+
+# Include the router from reports.py
+app.include_router(reports_router)
 
 def modify_table_structure(inspector, metadata):
     """

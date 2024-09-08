@@ -133,3 +133,13 @@ class ItemSchema(BaseModel):
 
     class Config:
         from_attributes = True
+
+from pydantic import BaseModel
+
+# User Registration Schema
+class UserRegisterSchema(BaseModel):
+    user_name: str
+    user_type: str
+
+    class Config:
+        from_attributes = True
