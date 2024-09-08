@@ -16,16 +16,72 @@ export class ViewGmComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // Navigate to manage characters (placeholder for actual functionality)
-  manageCharacters() {
-    // Navigate to character management page or feature
+  // Navigate to add character
+  addCharacter() {
+    this.router.navigate(['/gm/add-character']);
   }
 
-  // Navigate to manage abilities (placeholder for actual functionality)
-  manageAbilities() {
-    // Navigate to ability management page or feature
+  // Navigate to add ability
+  addAbility() {
+    this.router.navigate(['/gm/add-ability']);
   }
 
+  // Navigate to add expertise
+  addExpertise() {
+    this.router.navigate(['/gm/add-expertise']);
+  }
+
+  // Navigate to add job skill
+  addJobSkill() {
+    this.router.navigate(['/gm/add-job-skill']);
+  }
+
+  // Navigate to add species passive
+  addSpeciesPassive() {
+    this.router.navigate(['/gm/add-species-passive']);
+  }
+
+  // Navigate to add item
+  addItem() {
+    this.router.navigate(['/gm/add-item']);
+  }
+
+  // Navigate to add weapon
+  addWeapon() {
+    this.router.navigate(['/gm/add-weapon']);
+  }
+
+  // Navigate to view all characters
+  viewCharacters() {
+    this.router.navigate(['/gm/view-characters']);
+  }
+
+  // Navigate to view all libraries
+  viewLibraries() {
+    this.router.navigate(['/gm/view-libraries']);
+  }
+
+  // Navigate to view all backpacks
+  viewBackpacks() {
+    this.router.navigate(['/gm/view-backpacks']);
+  }
+
+  // Navigate to view item inventory
+  viewItems() {
+    this.router.navigate(['/gm/view-items']);
+  }
+
+  // Navigate to view all abilities
+  viewAbilities() {
+    this.router.navigate(['/gm/view-abilities']);
+  }
+
+  // Navigate to bulk remove items
+  bulkRemoveItems() {
+    this.router.navigate(['/gm/remove-items']);
+  }
+
+  // Toggle the side menu
   toggleMenu() {
     const menu = document.querySelector('.side-menu');
     const hamburger = document.querySelector('.hamburger-menu'); // Select the hamburger button

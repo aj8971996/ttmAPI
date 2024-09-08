@@ -1,6 +1,6 @@
 <div class="gm-view">
   <h1>Welcome, GM!</h1>
-  
+
   <!-- Hamburger menu button -->
   <div class="hamburger-menu" (click)="toggleMenu()">
     <div class="bar"></div>
@@ -10,6 +10,62 @@
 
   <!-- Include the side menu -->
   <app-side-menu></app-side-menu>
+
+  <!-- Action Cards Section -->
+  <div class="action-cards-container">
+    <div class="card" (click)="addCharacter()">
+      <h3>Add Character</h3>
+      <p>Create a new character using the POST /gm/add-character/ endpoint.</p>
+    </div>
+    <div class="card" (click)="addAbility()">
+      <h3>Add Ability</h3>
+      <p>Assign abilities to characters with the POST /gm/add-ability/ endpoint.</p>
+    </div>
+    <div class="card" (click)="addExpertise()">
+      <h3>Add Expertise</h3>
+      <p>Provide expertise to characters via the POST /gm/add-expertise/ endpoint.</p>
+    </div>
+    <div class="card" (click)="addJobSkill()">
+      <h3>Add Job Skill</h3>
+      <p>Enhance characters with job skills using POST /gm/add-job-skill/.</p>
+    </div>
+    <div class="card" (click)="addSpeciesPassive()">
+      <h3>Add Species Passive</h3>
+      <p>Assign species passives via the POST /gm/add-species-passive/ endpoint.</p>
+    </div>
+    <div class="card" (click)="addItem()">
+      <h3>Add Item</h3>
+      <p>Add new items using the POST /gm/add-item/ endpoint.</p>
+    </div>
+    <div class="card" (click)="addWeapon()">
+      <h3>Add Weapon</h3>
+      <p>Add weapons for characters using POST /gm/add-weapon/.</p>
+    </div>
+    <div class="card" (click)="viewCharacters()">
+      <h3>View Characters</h3>
+      <p>See all created characters using GET /gm/view-characters/.</p>
+    </div>
+    <div class="card" (click)="viewLibraries()">
+      <h3>View Libraries</h3>
+      <p>Explore available libraries using GET /gm/view-libraries/.</p>
+    </div>
+    <div class="card" (click)="viewBackpacks()">
+      <h3>View Backpacks</h3>
+      <p>Check player backpacks with GET /gm/view-backpacks/.</p>
+    </div>
+    <div class="card" (click)="viewItems()">
+      <h3>View Item Inventory</h3>
+      <p>Access the item inventory with GET /gm/view-items/.</p>
+    </div>
+    <div class="card" (click)="viewAbilities()">
+      <h3>View Abilities</h3>
+      <p>Manage abilities using GET /gm/view-abilities/.</p>
+    </div>
+    <div class="card" (click)="bulkRemoveItems()">
+      <h3>Bulk Remove Items</h3>
+      <p>Delete multiple items at once with DELETE /gm/remove-items/.</p>
+    </div>
+  </div>
 
   <!-- Logout button -->
   <div class="logout-container">
